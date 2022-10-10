@@ -1,17 +1,18 @@
 import axios from "axios";
+import api from "../config/global"
 
 export default class API {
     // no params
     async getProduct() {
-        let a = await axios.get(`http://localhost:4001/product`)
+        let a = await axios.get(api.API+`/product`)
         return a.data;
     }
     async getTopProduct() {
-        let a = await axios.get(`http://localhost:4001/product/desc`) 
+        let a = await axios.get(api.API+`/product/desc`) 
         return a.data;
     }
     async createProduct(id,name,price,description,slug,category,col,sty,detail,disc,disc_percent,thumb ) {
-        let a = await axios.post(`http://localhost:4001/product/create`,{
+        let a = await axios.post(api.API+`/product/create`,{
             id_product : id,
             product_name: name,
             product_price: price,
@@ -29,11 +30,11 @@ export default class API {
         return a;
     }
     async getCommentbyId(id) {
-        let a = await axios.get(`http://localhost:4001/comment/` + id)
+        let a = await axios.get(api.API+`/comment/` + id)
         return a.data;
     }
     async createNewComment(id, name, productid, context, starnum, timenow){
-        let a = await axios.post(`http://localhost:4001/comment/create`,{
+        let a = await axios.post(api.API+`/create`,{
             id_user: id,
             user_name: name,
             id_product: productid,
@@ -44,38 +45,38 @@ export default class API {
         return a;
     }
     async getOrderbyIDuser(id) {
-        let a = await axios.get(`http://localhost:4001/order/`+ id)
+        let a = await axios.get(api.API+`/order/`+ id)
         return a.data;
     }
     async getCartbyIDuser(id) {
-        let a = await axios.get(`http://localhost:4001/cart/`+ id)
+        let a = await axios.get(api.API+`/cart/`+ id)
         return a.data;
     }
     async getCartinfobyId(id) {
-        let a = await axios.get(`http://localhost:4001/cartinfo/`+ id)
+        let a = await axios.get(api.API+`/cartinfo/`+ id)
         return a.data;
     }
     async getProductbySlug(id) {
-        let a = await axios.get(`http://localhost:4001/product/`+ id)
+        let a = await axios.get(api.API+`/product/`+ id)
         return a.data;
     }
     async getProductbyCategory(category) {
-        let a = await axios.get(`http://localhost:4001/product/category/`+ category)
+        let a = await axios.get(api.API+`/category/`+ category)
         return a.data;
     }
     async getUserbyIDuser(id){
-        let a = await axios.get(`http://localhost:4001/user/` + id)
+        let a = await axios.get(api.API+`/user/` + id)
         return a.data;
     }
     async updatefavorProduct(iduser, idproduct){
-        let a = await axios.post(`http://localhost:4001/user/favorite`,{
+        let a = await axios.post(api.API+`/user/favorite`,{
             id_user: iduser,
             id_product: idproduct
         })
         return a;
     }
     async createNewOrder(iduser,idproduct,productname,price,img,col,sty,quantity,siz) {
-        let a = await axios.post(`http://localhost:4001/order/create`,{
+        let a = await axios.post(api.API+`/order/create`,{
             id_user: iduser,
             id_product: idproduct,
             product_name: productname,
@@ -89,7 +90,7 @@ export default class API {
         return a;
     }
     async deleteOneInOrder(iduser,idproduct){
-        let a = await axios.post(`http://localhost:4001/order/deleteOne`,{
+        let a = await axios.post(api.API+`/order/deleteOne`,{
             id_user:iduser,
             id_product: idproduct
         })
@@ -97,7 +98,7 @@ export default class API {
     }
     async createNewCart(iduser, tot, add, phon)
     {
-        let a = await axios.post(`http://localhost:4001/cart/create`,{
+        let a = await axios.post(api.API+`/cart/create`,{
             id_user: iduser,
             total: tot,
             address: add,
@@ -106,25 +107,25 @@ export default class API {
         return a;
     }
     async getProductbyPriceGreater(price) {
-        let a = await axios.get(`http://localhost:4001/product/price/greater/`+ price)
+        let a = await axios.get(api.API+`/product/price/greater/`+ price)
         return a.data;
     }
     async getProductbyPriceSmaller(price) {
-        let a = await axios.get(`http://localhost:4001/product/price/smaller/`+ price)
+        let a = await axios.get(api.API+`/product/price/smaller/`+ price)
         return a.data;
     }
     async getProductbyPriceBetween(greaterthan, smallerthan) {
-        let a = await axios.get(`http://localhost:4001/product/price/between/`+ greaterthan +`/`+ smallerthan)
+        let a = await axios.get(api.API+`/product/price/between/`+ greaterthan +`/`+ smallerthan)
         return a.data;
     }
     async getTotalbyIDuser(id) {
-        let a = await axios.get(`http://localhost:4001/order/total/`+ id)
+        let a = await axios.get(api.API+`/order/total/`+ id)
         return a.data;
     }
     //for login
     async UserLogin(name,pass)
     {
-        let a = await axios.post(`http://localhost:4001/user/login`,{
+        let a = await axios.post(api.API+`/user/login`,{
             username : name,
             password : pass
         })
@@ -132,7 +133,7 @@ export default class API {
     }
     async UserRegister(name,pass)
     {
-        let a = await axios.post(`http://localhost:4001/user/resigter`,{
+        let a = await axios.post(api.API+`/user/resigter`,{
             username : name,
             password : pass
         })
@@ -140,7 +141,7 @@ export default class API {
     }
     async UpdateUser(id,email,phone,address)
     {
-        let a = await axios.post(`http://localhost:4001/user/update`,{
+        let a = await axios.post(api.API+`/user/update`,{
             id: id,
             email: email,
             phone: phone,
@@ -148,54 +149,4 @@ export default class API {
         })
         return a;
     }
-    // async getChartHome() {
-    //     let a = await axios.get(`${global.config.API}/chart-home`)
-    //     return a.data;
-    // }
-    // async getNewReleaseChart() {
-    //     let a = await axios.get(`${global.config.API}/new-release-chart`)
-    //     return a.data;
-    // }
-    // // 1 param
-    // async getSong(id) {
-    //     let a = await axios.get(`${global.config.API}/song?id=${id}`)
-    //     return a.data;
-    // }
-    // async getDetailPlaylist(id) {
-    //     let a = await axios.get(`${global.config.API}/detail-playlist?id=${id}`)
-    //     return a.data;
-    // }
-    // async getHome(id) {
-    //     let a = await axios.get(`${global.config.API}/home?id=${id}`)
-    //     return a.data;
-    // }
-    // async getInfoSong(id) {
-    //     let a = await axios.get(`${global.config.API}/song-info?id=${id}`)
-    //     return a.data;
-    // }
-    // async getArtist(name) {
-    //     let a = await axios.get(`${global.config.API}/artist?name=${name}`)
-    //     return a.data;
-    // }
-    // async getLyric(id) {
-    //     let a = await axios.get(`${global.config.API}/lyric?id=${id}`)
-    //     return a.data;
-    // }
-    // async search(name) {
-    //     let a = await axios.get(`${global.config.API}/search?name=${name}`)
-    //     return a.data;
-    // }
-    // async getCategoryMV(id) {
-    //     let a = await axios.get(`${global.config.API}/category-mv?id=${id}`)
-    //     return a.data;
-    // }
-    // async getVideo(id) {
-    //     let a = await axios.get(`${global.config.API}/video-mv?id=${id}`)
-    //     return a.data;
-    // }
-    // // 3 params
-    // async getListMV(id, page, count) {
-    //     let a = await axios.get(`${global.config.API}/list-mv?id=${id}&page=${page}&count=${count}`)
-    //     return a.data;
-    // }
 }
