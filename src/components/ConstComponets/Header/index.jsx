@@ -14,9 +14,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ItemHeaderBag from "../ItemHeaderBag";
 import { useNavigate } from "react-router-dom";
 
-import logo from "../../../assets/logo.jpg";
 import emptyCart from "../../../assets/emptycart.png";
 import { data } from "autoprefixer";
+import logo from "../../../assets/logo.jpg";
 
 const api = new API();
 const Header = () => {
@@ -42,7 +42,6 @@ const Header = () => {
       });
       api.getOrderbyIDuser(id).then((data) => {
         setProducts(data.data[0].orders);
-        // console.log(data.data[0].orders)
       });
       api.getProduct().then((res) => {
         setProducts(res.data);
@@ -51,7 +50,6 @@ const Header = () => {
   }, [window.location.href]);
 
   // const handleDelete = (id, stt) => {
-  //     // console.log(id)
   //     let newArr = products.filter((item, i) => i !== stt)
   //     setProducts(newArr)
   //     api.deleteOneInOrder("1", id)
@@ -65,6 +63,7 @@ const Header = () => {
     localStorage.setItem("userid", "");
     navigate("/");
     setUser(false);
+    window.location.reload();
   };
   return (
     <div className={style.header}>
@@ -130,7 +129,7 @@ const Header = () => {
                       >
                         <Link
                           to={"/productinfo/" + product.slug}
-                          className='w-full'
+                          className="w-full"
                           onClick={() => {
                             setSearch(false);
                             setSearchValue("");
@@ -160,7 +159,7 @@ const Header = () => {
                 </Link>
               </li>
               <li className={style.account__func_item}>
-                <FontAwesomeIcon icon={faUser} />
+                <FontAwesomeIcon className="text-[#00A4B4]" icon={faUser} />
                 <ul className={style.account__func_item_info}>
                   <li>
                     <div>
